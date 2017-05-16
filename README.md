@@ -1,5 +1,7 @@
-EPSI B3 : Java EE
-=================
+POEI promo juin 2017 ; cours de Java EE
+=======================================
 
-Cours de troisième année de l'EPSI Bordeaux consacré à Java EE.
+Le cours est disponible à 
+
+http://spoonless.github.io/epsi-poei-201705
 
