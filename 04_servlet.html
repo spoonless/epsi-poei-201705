@@ -286,6 +286,52 @@ public class HelloServlet extends HttpServlet {
 		</dl>
 	</article>
 	
+	<article class="exercice">
+		<h2>Exercice&nbsp;: déploiement à partir du web.xml</h2>
+		<dl>
+			<dt>Objectif</dt>
+			<dd>Déployer une servlet en utilisant le fichier de déploiement web.xml. Pour cela, vous allez déployer une servlet fournie
+			par une bibliothèque tierce : <b>barcode4j</b>. Cette servlet génère des codes barres à la volée.
+
+			<p>Lorsque l'utilisateur soumet un formulaire avec son nom, le serveur répond une page Web qui doit afficher le nom transmis
+			ainsi qu'un code barre 2D correspondant au nom envoyé dans le formulaire. Un code barre 2D correspond au type <strong>datamatrix</strong> pour la servlet barcode4J.
+			Autrement dit, il faut passer <code>type=datamatrix</code> comme paramètre à cette servlet.</p>
+			<p>Consultez la liste des paramètres supportés par la servlet barcode4j dans la <a href="http://barcode4j.sourceforge.net/2.1/servlet.html">documentation</a>.</p>
+			
+			<figure>
+				<figcaption>Exemple de code barre 2D (datamatrix) généré par barcode4</figcaption>
+				<img alt="exemple de code barre de type datamatrix" src="assets/barcode4j-example.png">
+			</figure>
+			</dd>
+
+			<dt>Ajout de barcode4j dans le projet</dt>
+			<dd>
+			Maven va vous permettre de récupérer automatiquement les bibliothèques qui vont vous être utiles pour cet exercice.
+			Ouvrez le fichier pom.xml du projet et dans la balise <code>&lt;dependencies&gt;</code>, ajoutez les deux dépendences suivantes :
+<pre><code class="xml">&lt;dependency&gt;
+  &lt;groupId&gt;net.sf.barcode4j&lt;/groupId&gt;
+  &lt;artifactId&gt;barcode4j&lt;/artifactId&gt;
+  &lt;version&gt;2.1&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;avalon-framework&lt;/groupId&gt;
+  &lt;artifactId&gt;avalon-framework-api&lt;/artifactId&gt;
+  &lt;version&gt;4.2.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+			<p>La sauvegarde du fichier pom.xml dans votre IDE doit entraîner un téléchargement par Maven de ces dépendances et leur ajout
+			dans la configuration du projet.</p>
+			<p>La servlet fournie par barcode4j s'appelle&nbsp;: <code><strong>org.krysalis.barcode4j.servlet.BarcodeServlet</strong></code></p>
+			</dd>
+
+			<dt>Modèle Maven du projet à télécharger</dt>
+			<dd><a href="assets/templates/webapp-template.zip">webapp-template.zip</a></dd>
+
+			<dt>Intégration du projet dans Eclipse</dt>
+			<dd>L'intégration du projet dans Eclipse suit la même procédure que celle vue lors de <a href="03_introduction_maven.html#maven_eclipse_import">l'introduction à Maven</a></dd>
+
+		</dl>
+	</article>
 
 	<footer class="license">
 		<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/fr/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/3.0/fr/88x31.png" /></a><br />Cette œuvre est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/fr/">Licence Creative Commons Attribution -  Partage dans les Mêmes Conditions 3.0 France</a>.
