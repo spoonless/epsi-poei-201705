@@ -4,13 +4,13 @@
 	<meta charset="UTF-8">
 	<title>L'API JAX-RS</title>
 	<meta name="author" content="David Gayerie">
-	<link href="css/article.css" rel="stylesheet" media="screen">
-	<link href="css/print-article.css" rel="stylesheet" media="print">
-	<link href="highlight/styles/zenburn.css" rel="stylesheet">
-	
-	<script src="highlight/highlight.pack.js"></script>
+	<link href="../css/article.css" rel="stylesheet" media="screen">
+	<link href="../css/print-article.css" rel="stylesheet" media="print">
+	<link href="../highlight/styles/qtcreator_light.css" rel="stylesheet">
+
+	<script src="../highlight/highlight.pack.js"></script>
 	<script>hljs.initHighlightingOnLoad();</script>
-	<script src="js/toc.js"></script>
+	<script src="../js/toc.js"></script>
 </head>
 <body>
 	<div id="titleBar">
@@ -23,7 +23,7 @@
 	<article>
 		<h1><script>document.write(document.title)</script></h1>
 		<section id="toc"></section>
-		
+
 		<p><a href="https://jax-rs-spec.java.net/">JAX-RS</a> est l'API conçue pour implémenter des API Web (aussi appelées Web Services RESTful).
 		Les API Web exploitent les possibilités du protocole HTTP pour permettre à des systèmes d'information
 		de communiquer et de s'échanger des services. JAX-RS est donc une API de programmation pour implémenter
@@ -31,21 +31,21 @@
 		n'est pas réservée à l'implémentation de services mais il peut tout aussi bien être utilisé pour
 		développer des applications Web plus traditionnelles.
 		</p>
-		
+
 		<p>JAX-RS 2.x est défini par la <a href="https://jcp.org/en/jsr/detail?id=339">JSR 339</a>. Comme pour tous les services et toutes API Java EE, il
 		existe plusieurs implémentations de cette spécification&nbsp;: <a href="https://jersey.java.net/">Jersey</a> (l'implémentation de référence), <a href="http://resteasy.jboss.org/">RestEasy</a>, <a href="https://cxf.apache.org/docs/jax-rs.html">Apache CXF</a>...
 		TomEE intègre l'implèmentation Apache CXF.</p>
-		
+
 		<aside>
 			<p>Dans un serveur d'application tel que TomEE, JAX-RS est disponible par défaut. Mais il est aussi possible
-			d'utiliser une implémentation dans des conteneurs plus légers comme Tomcat ou Jetty sous la forme d'un framework 
+			d'utiliser une implémentation dans des conteneurs plus légers comme Tomcat ou Jetty sous la forme d'un framework
 			tiers ajouté à une application Web. Vous devez alors vous reporter à la documentation de l'implémentation choisie pour
 			connaître la marche à suivre.</p>
 		</aside>
-		
+
 		<section>
 			<h2>La notion de ressource</h2>
-			
+
 			<p>Dans le Web, ce qui est désigné par une URI est appelé une <strong>ressource</strong>. Une ressource offre
 			une interface uniforme qui est définie dans HTTP par l'ensemble des méthodes&nbsp;: GET, HEAD, POST, PUT, DELETE, OPTIONS...
 			Un client HTTP positionne dans sa requête une méthode pour indiquer le type d'opération que le serveur doit effectuer sur la ressource.</p>
@@ -71,7 +71,7 @@
 						<li>Le client souhaite que le serveur effectue un traitment.</li>
 						<li>Le client souhaite modifier partiellement une ressource.</li>
 					</ul>
-				
+
 				</dd>
 
 				<dt><a href="http://tools.ietf.org/html/rfc7231#section-4.3.7">OPTIONS</a></dt>
@@ -84,15 +84,15 @@
 				<dt><a href="http://tools.ietf.org/html/rfc7231#section-4.3.6">CONNECT</a></dt>
 				<dd>&Eacute;tablit un tunnel à travers un proxy. Cette méthode n'est pas utilisée pour la réalisation d'API Web.</dd>
 			</dl>
-			
+
 		</section>
 		<section>
 			<h2>Implémenter des ressources avec JAX-RS</h2>
-			
+
 			<p>JAX-RS permet d'implémenter des ressources sous la forme de composants Java EE. Une classe représentant une ressource est
 			identifiée grâce à l'annotation <strong><code><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/Path.html">@Path</a></code></strong>.</p>
-			
-			
+
+
 			<dl>
 				<dt><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/Path.html">@Path</a></dt>
 				<dd>L'annotation <code><strong><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/Path.html">@javax.ws.rs.Path</a></strong></code> indique le chemin d'URI qui identifie la ressource.
@@ -115,8 +115,8 @@ public class UserResource {
 					<p>Utilisée sur une méthode, cette annotation permet de spécifier une sous-chemin dans la ressource. Si cette méthode retourne une classe
 					utilisant des annotations JAX-RS, on parle alors de <strong>sous-ressource</strong>.
 					</p>
-					
-				
+
+
 <pre><code class="java">
 package fr.epsi;
 
@@ -124,7 +124,7 @@ import javax.ws.rs.Path;
 
 @Path("/user")
 public class UserResource {
-	
+
   @Path("/geo")
   public GeoLocation getGeographicalLocation() {
     //...
@@ -142,7 +142,7 @@ public class UserResource {
 					s'agit d'une sous-ressource. Il devient possible de créer des arborescences de ressources en Java basées sur le chemin de l'URI.</p>
 				</dd>
 			</dl>
-			
+
 			<dl>
 				<dt>Les annotations de méthodes</dt>
 				<dd>JAX-RS fournit une annotation pour presque toutes les méthodes HTTP&nbsp;:
@@ -153,7 +153,7 @@ public class UserResource {
 						<li><code><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/PUT.html">@javax.ws.rs.PUT</a></code></li>
 						<li><code><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/DELETE.html">@javax.ws.rs.DELETE</a></code></li>
 						<li><code><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/OPTIONS.html">@javax.ws.rs.OPTIONS</a></code></li>
-					</ul> 
+					</ul>
 					<p>Elles permettent d'indiquer quelle méthode Java doit être appelée pour traiter la méthode de la requête HTTP entrante.</p>
 <pre><code class="java">
 package fr.epsi;
@@ -176,7 +176,7 @@ public class UserResource {
   public User createOrUpdate() {
     //....
   }
-  
+
   @DELETE
   public void delete() {
     //....
@@ -203,14 +203,14 @@ public class UserResource {
 					</aside>
 
 				</dd>
-				
+
 				<dt>Paramètre dans le chemin d'URI</dt>
 				<dd>
 					Comme chaque ressource Web est identifiée par une URI, il est important pour le serveur de pouvoir récupérer dans le chemin
 					les informations qui vont lui permettre de réaliser cette identification dynamiquement. Par exemple, le serveur peut
 					extraire du chemin de la ressource une clé primaire lui permettant d'effectuer une recherche en base de données.
 					<p>Avec JAX-RS, on déclare des paramètres de chemin entre accolades et on utilise l'annotation
-					<code><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/PathParam.html">javax.ws.rs.PathParam</a></code> 
+					<code><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/PathParam.html">javax.ws.rs.PathParam</a></code>
 					pour récupérer leur valeur dans les paramètres des méthodes&nbsp;:</p>
 
 <pre><code class="java">
@@ -225,7 +225,7 @@ import javax.ws.rs.PathParam;
 
 @Path("/user/{id}")
 public class UserResource {
-  
+
   @GET
   public User get(@PathParam("id") long id) {
     //....
@@ -235,7 +235,7 @@ public class UserResource {
   public User createOrUpdate(@PathParam("id") long id, User user) {
     //....
   }
-  
+
   @DELETE
   public void delete(@PathParam("id") long id) {
     //....
@@ -249,7 +249,8 @@ public class UserResource {
 
   @GET
   @Path("/subscription/{idSubscription}")
-  public Subscription getSubscription(@PathParam("id") long id, @PathParam("idSubscription") String idSub) {
+  public Subscription getSubscription(@PathParam("id") long id,
+                                      @PathParam("idSubscription") String idSub) {
     //....
   }
 }
@@ -273,13 +274,13 @@ import javax.ws.rs.PathParam;
 
 @Path("/user/{id}")
 public class UserResource {
-  
+
   private final long id;
-  
+
   public UserResource(@PathParam("id") long id) {
     this.id = id;
   }
-  
+
   @GET
   public User get() {
     // ...
@@ -289,7 +290,7 @@ public class UserResource {
   public User createOrUpdate(User user) {
     // ...
   }
-  
+
   @DELETE
   public void delete() {
     //....
@@ -308,12 +309,12 @@ public class UserResource {
   }
 }
 
-</code></pre>		
+</code></pre>
 						<p>Contrairement à l'API Servlet, l'API JAX-RS <strong>crée une instance</strong> de <code>UserResource</code> pour chaque
 						requête. Il est donc possible de stocker dans l'état de l'instance des informations
 						spécifiques à la requête (comme l'identifiant de l'utilisateur).</p>
 					</aside>
-					
+
 					<p>JAX-RS peut réaliser le transtypage d'un paramètre de chemin vers les types primitifs et les chaînes de caractères.
 					Cela permet de garantir un premier contrôle de la validité de la donnée. Si la valeur attendue doit avoir un motif
 					particulier, il est possible de le spécifier avec une expression régulière&nbsp;:</p>
@@ -327,13 +328,13 @@ import javax.ws.rs.PathParam;
 
 @Path("/user/{id: [0-9]{5}}")
 public class UserResource {
-  
+
   private final long id;
-  
+
   public UserResource(@PathParam("id") long id) {
     this.id = id;
   }
-  
+
   @GET
   public User get() {
     // ...
@@ -342,15 +343,15 @@ public class UserResource {
 }
 
 </code></pre>
-					<p>Par défaut, JAX-RS utilise comme expression régulière pour un paramètre de chemin <code><strong>[^/]+?</strong></code></p>	
+					<p>Par défaut, JAX-RS utilise comme expression régulière pour un paramètre de chemin <code><strong>[^/]+?</strong></code></p>
 
 				</dd>
-				
+
 				<dt><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/Consumes.html">@Consumes</a> / <a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/Produces.html">@Produces</a></dt>
 				<dd>
 					Lorsqu'un client soumet une requête pour transmettre des informations au serveur (comme des données de formulaire) et
 					quand un serveur retourne du contenu à un client, il est nécessaire de préciser le type de contenu. On utilise pour cela
-					l'en-tête HTTP <code><a href="http://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-type</a></code> avec comme valeur le type 
+					l'en-tête HTTP <code><a href="http://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-type</a></code> avec comme valeur le type
 					<a href="http://fr.wikipedia.org/wiki/Type_MIME">MIME</a>.
 					<p>Une liste (non exhaustive) des types MIME les plus courants est&nbsp;:</p>
 					<table>
@@ -389,11 +390,11 @@ public class UserResource {
 							</tr>
 						</tbody>
 					</table>
-					
-					<p>La classe et/ou les méthodes d'une Ressource JAX-RS peuvent utiliser les annotations <a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/Consumes.html">@Consumes</a> 
+
+					<p>La classe et/ou les méthodes d'une Ressource JAX-RS peuvent utiliser les annotations <a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/Consumes.html">@Consumes</a>
 					et <a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/Produces.html">@Produces</a> pour indiquer respectivement le type de contenu attendu dans la requête
 					et le type de contenu de la réponse.</p>
-				
+
 <pre><code class="java">
 package fr.epsi;
 
@@ -409,13 +410,13 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/user/{id}")
 public class UserResource {
-  
+
   private final long id;
-  
+
   public UserResource(@PathParam("id") long id) {
     this.id = id;
   }
-  
+
   @GET
   @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
   public User get() {
@@ -428,7 +429,7 @@ public class UserResource {
   public User createOrUpdate(User user) {
     // ...
   }
-  
+
   @DELETE
   public void delete() {
     //....
@@ -449,23 +450,23 @@ public class UserResource {
 }
 
 </code></pre>
-			
+
 					<aside>
 						<p>Plutôt que d'écrire&nbsp;:</p>
 <pre><code class="java">@Produces("application/json")
 </code></pre>
-					<p>Il est recommandé d'utiliser les constantes déclarées dans la classe 
+					<p>Il est recommandé d'utiliser les constantes déclarées dans la classe
 					<code><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/core/MediaType.html">javax.ws.rs.core.MediaType</a></code>&nbsp;</p>
 <pre><code class="java">@Produces(MediaType.APPLICATION_JSON)
 </code></pre>
 				</aside>
-	
+
 				</dd>
-				
+
 				<dt><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/QueryParam.html">@QueryParam</a></dt>
 				<dd>Comme pour les paramètres de chemin, il est possible de récupérer la valeur des paramètres de la requête comme arguments
 				des méthodes de la ressource JAX-RS grâce à l'annotation <code><strong><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/QueryParam.html">@javax.ws.rs.QueryParam</a></strong></code>.
-	
+
 <pre><code class="java">
   @GET
   @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -481,8 +482,8 @@ public class UserResource {
 				<dd>Les données transmises <i>via</i> un formulaire HTML peuvent être récupérées comme arguments
 				des méthodes de la ressource JAX-RS grâce à l'annotation <code><strong><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/FormParam.html">@javax.ws.rs.FormParam</a></strong></code>.
 				Pour le cas d'une requête de formulaire, le contenu attendu est presque toujours de type <code>application/x-www-form-urlencoded</code>.
-				
-	
+
+
 <pre><code class="java">
   @POST
   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -499,25 +500,703 @@ public class UserResource {
 						</ul>
 					</aside>
 				</dd>
+
+				<dt><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/core/Context.html">@Context</a></dt>
+				<dd>Si vous avez besoin d'obtenir des informations sur le contexte d'exécution de la requête, vous pouvez
+				utilisez l'annotation <strong><code><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/core/Context.html">@javax.ws.rs.core.Context</a></code></strong>
+				pour obtenir une instance d'une classe particulière. Les classes supportées sont&nbsp;:
+				<ul>
+					<li><code><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/core/UriInfo.html">javax.ws.rs.core.UriInfo</a></code>&nbsp;: Cette interface donne accès à l'URI de la requête.</li>
+					<li><code><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/core/Request.html">javax.ws.rs.core.Request</a></code>&nbsp;: Cette interface fournit des méthodes utilitaires pour le traitement conditionnel de la requête.</li>
+					<li><code><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/core/HttpHeaders.html">javax.ws.rs.core.HttpHeaders</a></code>&nbsp;: Cette interface permet d'accéder à l'ensemble des en-têtes HTTP de la requête.</li>
+					<li><code><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/core/SecurityContext.html">javax.ws.rs.core.SecurityContext</a></code>&nbsp;: Cette interface permet d'accéder aux informations de sécurité et d'authentification.</li>
+					<li><code><a href="http://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServletRequest.html">javax.servlet.http.HttpServletRequest</a></code>&nbsp;: La représentation de la requête avec l'API Servlet.</li>
+					<li><code><a href="http://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServletResponse.html">javax.servlet.http.HttpServletResponse</a></code>&nbsp;: La représentation de la réponse avec l'API Servlet.</li>
+					<li><code><a href="http://docs.oracle.com/javaee/7/api/javax/servlet/ServletContext.html">javax.servlet.ServletContext</a></code>&nbsp;: Le contexte d'exécution des servlets.</li>
+					<li><code><a href="http://docs.oracle.com/javaee/7/api/javax/servlet/ServletConfig.html">javax.servlet.ServletConfig</a></code>&nbsp;: La configuration de la servlet traitant la requête.</li>
+				</ul>
+
+<pre><code class="java">
+  @GET
+  @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+  public List&lt;User&gt; search(@Context UriInfo uriInfo, @Context Request req) {
+    // ...
+  }
+
+</code></pre>
+
+				<aside>
+					<p>Pour des utilisations plus avancées, l'annotation <strong><code><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/core/Context.html">@javax.ws.rs.core.Context</a></code></strong>
+					peut être utilisée pour injecter une instance de <code><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/core/Application.html">javax.ws.rs.core.Application</a></code>,
+					de <code><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/ext/Providers.html">javax.ws.rs.ext.Providers</a></code> et de
+					<code><a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/ext/ContextResolver.html">javax.ws.rs.ext.ContextResolver&lt;T&gt;</a></code>.
+					</p>
+				</aside>
+				</dd>
+
+
 			</dl>
 		</section>
+
+		<section>
+			<h2>Data binding</h2>
+
+			<p>Lorsqu'une méthode d'une ressource retourne une instance d'un objet Java, JAX-RS va tenter de créer une réponse au format
+			souhaité en fonction de l'annotation <a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/Produces.html">@Produces</a>.
+			Il existe un ensemble de règles par défaut permettant de passer d'un objet Java à un document XML ou JSON. On appelle
+			l'ensemble de ces règle le <strong>data binding</strong>.</p>
+			<p>Si la réponse attentue est au format JSON alors JAX-RS va contruire une réponse en se basant sur les accesseurs (les getters)
+			de la classe.</p>
+
+			<p>Si on souhaite retourner une instance de la classe suivante&nbsp;:</p>
+<pre><code class="java">
+package fr.epsi;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Person {
+
+  private String name;
+  private int age;
+  private List&lt;Person&gt; children = new ArrayList&lt;&gt;();
+
+  public Person() {
+  }
+
+  public Person(String name, int age) {
+    this.name = name;
+    this.setAge(age);
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public int getAge() {
+    return age;
+  }
+
+  public void setAge(int age) {
+    this.age = age;
+  }
+
+  public List&lt;Person&gt; getChildren() {
+    return children;
+  }
+
+  public Person addChild(Person child) {
+    this.children.add(child);
+    return child;
+  }
+}
+
+</code></pre>
+
+			<p>Si on définit une ressource de la façon suivante&nbsp;:</p>
+
+<pre><code class="java">
+package fr.epsi;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("/person")
+public class PersonResource {
+
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  public Person get() {
+    Person michel = new Person("Michel Raynaud", 56);
+    michel.addChild(new Person("Anne Raynaud", 38)).addChild(new Person("Pierre Blémand", 16));
+    michel.addChild(new Person("Damien Raynaud", 32));
+    return michel;
+  }
+}
+
+</code></pre>
+
+			<p>Alors un appel HTTP à cette ressource génèrera un document JSON de la forme&nbsp;:</p>
+
+<pre><code class="json">
+{"children":[
+  {"children":[
+    {"children":[],
+     "name":"Pierre Blémand",
+     "age":16}
+   ],
+   "name":"Marie Raynaud",
+   "age":38},
+  {"children":[],
+   "name":"Damien Raynaud",
+   "age":32}
+ ],
+ "name":"Michel Raynaud",
+ "age":56}
+
+ </code></pre>
+
+			<aside class="tip">
+				<p>Il est également possible de réaliser l'opération inverse pour récupérer en paramètre un
+				document JSON tranformé en une instance Java.
+				</p>
+
+<pre><code class="java">
+package fr.epsi;
+
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.core.MediaType;
+
+@Path("/person")
+public class PersonResource {
+
+  @POST
+  @Consumes(MediaType.APPLICATION_JSON)
+  public void post(Person person) {
+    // ...
+  }
+}
+
+</code></pre>
+			</aside>
+
+			<p>Il est également possible de passer d'une instance Java à un document XML ou d'un document XML à une instance Java.
+			Pour cela, JAX-RS utilise <a href="https://jaxb.java.net/tutorial/">JAXB</a> (Java Architecture for XML Binding) qui
+			intégré au langage Java. JAXB utilise des annotations pour fournir des indications sur la façon dont une classe Java
+			peut être associée à un document XML.</p>
+			<p>Les principales annotations JAXB sont&nbsp;:</p>
+
+			<dl>
+				<dt><a href="https://docs.oracle.com/javase/8/docs/api/javax/xml/bind/annotation/XmlRootElement.html">@XmlRootElement</a></dt>
+				<dd>Une annotation est utilisable sur une classe Java pour indiquer quelle peut être utilisée pour représenter la racine d'un
+				document XML. On peut utiliser l'attribut <strong><code>name</code></strong> de l'annotation pour préciser le nom de l'élément
+				racine du document XML et l'attibut <strong><code>namespace</code></strong> pour en préciser l'espace de nom.</dd>
+
+				<dt><a href="https://docs.oracle.com/javase/8/docs/api/javax/xml/bind/annotation/XmlElement.html">@XmlElement</a></dt>
+				<dd>Une annotation est utilisable sur les accesseurs (getters) des propriétés d'une classe. On peut utiliser l'attribut <strong><code>name</code></strong> de l'annotation pour préciser le nom de l'élément
+				racine du document XML et l'attibut <strong><code>namespace</code></strong> pour en préciser l'espace de nom.
+				Cette annotation est optionnelle. Par défaut JXB considère qu'une propriété produit un élément XML du même nom et sans espace de nom XML.</dd>
+
+				<dt><a href="https://docs.oracle.com/javase/8/docs/api/javax/xml/bind/annotation/XmlTransient.html">@XmlTransient</a></dt>
+				<dd>Cette annotation, ajoutée sur les accesseurs d'une propriété d'une classe, indique que cette propriété ne doit
+				pas apparaître dans le document XML.</dd>
+			</dl>
+
+			<p>Si nous reprenons l'exemple de la classe <code>Person</code>, nous pouvons ajouter les annotations JAXB&nbsp;:</p>
+
+<pre><code class="java">
+package fr.epsi;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="person", namespace="http://www.epsi.fr/cours/javaee")
+public class Person {
+
+  private String name;
+  private int age;
+  private List&lt;Person&gt; children = new ArrayList&lt;&gt;();
+
+  public Person() {
+  }
+
+  public Person(String name, int age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  @XmlElement(namespace="http://www.epsi.fr/cours/javaee")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  @XmlElement(namespace="http://www.epsi.fr/cours/javaee")
+  public int getAge() {
+    return age;
+  }
+
+  public void setAge(int age) {
+    this.age = age;
+  }
+
+  @XmlElement(name="person", namespace="http://www.epsi.fr/cours/javaee")
+  @XmlElementWrapper(name="children", namespace="http://www.epsi.fr/cours/javaee")
+  public List&lt;Person&gt; getChildren() {
+    return children;
+  }
+
+  public Person addChild(Person child) {
+    this.children.add(child);
+    return child;
+  }
+}
+
+</code></pre>
+
+			<p>Si nous autorisons une ressource à produire du XML&nbsp;:</p>
+
+<pre><code class="java">
+package fr.epsi;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("/person")
+public class PersonResource {
+
+  @GET
+  @Produces(MediaType.APPLICATION_XML)
+  public Person get() {
+    Person michel = new Person("Michel Raynaud", 56);
+    michel.addChild(new Person("Anne Raynaud", 38)).addChild(new Person("Pierre Blémand", 16));
+    michel.addChild(new Person("Damien Raynaud", 32));
+    return michel;
+  }
+}
+
+</code></pre>
+
+			<p>Alors un appel HTTP à cette ressource génèrera un document JSON de la forme&nbsp;:</p>
+
+<pre><code class="xml">
+&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;person xmlns="http://www.epsi.fr/cours/javaee"&gt;
+  &lt;age&gt;56&lt;/age&gt;
+  &lt;children&gt;
+    &lt;person&gt;
+      &lt;age&gt;38&lt;/age&gt;
+      &lt;children&gt;
+        &lt;person&gt;
+          &lt;age&gt;16&lt;/age&gt;
+          &lt;children/&gt;
+          &lt;name&gt;Pierre Blémand&lt;/name&gt;
+        &lt;/person&gt;
+      &lt;/children&gt;
+      &lt;name&gt;Anne Raynaud&lt;/name&gt;
+    &lt;/person&gt;
+    &lt;person&gt;
+      &lt;age&gt;32&lt;/age&gt;
+      &lt;children/&gt;
+      &lt;name&gt;Damien Raynaud&lt;/name&gt;
+    &lt;/person&gt;
+  &lt;/children&gt;
+  &lt;name&gt;Michel Raynaud&lt;/name&gt;
+&lt;/person&gt;
+
+</code></pre>
+
+			<aside>
+				<p>Il est possible d'indiquer dans les annotations <strong><code>@Produces</code></strong> et <strong><code>@Consumes</code></strong> plusieurs
+				formats supportés. Pour la génération de la réponse, JAX-RS utilise le mécanisme de la négociation de contenu HTTP pour déterminer quel est le format
+				à utiliser pour la réponse.</p>
+				<figure>
+					<figcaption>Exemple de ressource supportant plusieurs formats de représentation</figcaption>
+<pre><code class="java">
+package fr.epsi;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("/person")
+public class PersonResource {
+
+  @GET
+  @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+  public Person get() {
+    // ...
+  }
+
+  @POST
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+  public void post(Person person) {
+    // ...
+  }
+}
+
+</code></pre>
+				</figure>
+			</aside>
+
+			<aside class="tip">
+				<p>Les annotations JAXB sont également exploitées pour la génération d'un document JSON. Par exemple si vous utilisez l'annotation <code><strong>@XmlElement</strong></code>
+				pour spécifier un nom particulier pour l'élément XML, l'attibut JSON aura également le même nom.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h2>Générer une réponse</h2>
+			<p>Parfois, il n'est pas suffisant de retourner une instance d'un objet Java en laissant à JAX-RS le soin de créer la réponse HTTP.
+			C'est notamment le cas si l'on souhaite retourner un code statut HTTP différent de 200 ou ajouter des en-têtes HTTP dans la réponse.
+			Pour cela, il faut retourner une instance de la classe
+			<a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/core/Response.html"><code><strong>javax.rs.core.Response</strong></code></a>.
+			Cette classe suit le <i>design pattern builder</i> et offre un ensemble de méthodes utilitaires pour construire la réponse. Au final,
+			il suffit d'appeler la méthode <code>build()</code> et retourner le résultat.</p>
+
+			<figure>
+				<figcaption>Exemple d'utilisation de la classe <code>javax.rs.core.Response</code></figcaption>
+<pre><code class="java">
+package fr.epsi;
+
+import java.net.URI;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
+@Path("/person")
+public class PersonResource {
+
+  @GET
+  @Path("/{name}")
+  @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+  public Response get(@PathParam("name") String name) {
+    Person person;
+
+    // ...
+
+    return Response.ok(person).build();
+  }
+
+  @POST
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+  public Response create(Person person, @Context UriInfo uriInfo) {
+
+    // ... on sauvegarde la représentation de la personne
+
+    // on construit l'URI correspondant à la personne
+    URI location = uriInfo.getRequestUriBuilder()
+                          .path(person.getName())
+                          .build();
+
+    // On retourne la réponse
+    return Response.created(location).entity(person).build();
+  }
+}
+
+</code></pre>
+			</figure>
+		</section>
+
+		<section>
+			<h2>Gérer des exceptions</h2>
+
+			<p>Par défaut, si une méthode d'une ressource génère une exception, alors JAX-RS la transforme en erreur HTTP 500.
+			Si l'on souhaite retourner un statut d'erreur différent, il est bien évidemment possible d'utiliser la classe
+			<a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/core/Response.html"><code><strong>javax.rs.core.Response</strong></code></a>,
+			mais il est plus intéressant de fournir les indications nécessaires à JAX-RS pour modifier son comportement selon le type d'exception
+			lancé par la méthode de la ressource.</p>
+			<p>Il est possible de lancer une exception de type <a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/WebApplicationException.html"><code><strong>WebApplicationException</strong></code></a>
+			ou une exception en héritant. JAX-RS fournit déjà des exceptions spécialisées pour les codes de statut les plus courants&nbsp;:
+			<a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/NotFoundException.html"><code><strong>NotFoundException</strong></code></a>,
+			<a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/BadRequestException.html"><code><strong>BadRequestException</strong></code></a>,
+			<a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/ServerErrorException.html"><code><strong>ServerErrorException</strong></code></a>...
+			et même la possibilité de traiter les redirections avec l'exception
+			<a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/RedirectionException.html"><code><strong>RedirectionException</strong></code></a>.
+			</p>
+			<p>Il est également possible de déclarer une classe implémentant l'interface
+			<a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/ext/ExceptionMapper.html"><code><strong>ExceptionMapper</strong></code></a>.
+			Un <code><strong>ExceptionMapper</strong></code> est déclaré pour un type d'exception et ses exceptions filles.
+			</p>
+			<figure>
+				<figcaption>Exemple d'un <code><strong>ExceptionMapper</strong></code> pour les exceptions de type <code><strong>ValiditionException</strong></code></figcaption>
+<pre><code class="java">
+package fr.epsi;
+
+import javax.validation.ValidationException;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
+
+@Provider
+public class ValidationExceptionMapper implements ExceptionMapper&lt;ValidationException&gt;{
+
+  @Override
+  public Response toResponse(ValidationException exception) {
+    return Response.status(Status.BAD_REQUEST)
+                   .type(MediaType.TEXT_PLAIN)
+                   .entity(exception.getMessage())
+                   .build();
+  }
+
+}
+
+</code></pre>
+			</figure>
+
+			<p>Dans l'exemple ci-dessus, tout appel à une méthode de ressource qui se terminera par une exception de type <code><strong>ValidationException</strong></code>
+			entrainera un appel de la méthode <code><strong>ValidationExcceptionMapper.toResponse</strong></code> qui génèrera
+			une réponse de type 400 (Bad Request) avec un message en texte brut
+			correspondant au message de l'exception.
+			</p>
+
+			<aside class="tip">
+				<p>Notez l'utilisation de l'annotation <a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/ext/Provider.html">@Provider</a>
+				dans l'exemple précédent. Cette annotation est utilisée dans JAX-RS pour signaler des classes utilitaires qui permettent
+				d'étendre le comportement par défaut de JAX-RS.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h2 id="bean_validation">La validation avec <em>Bean Validation</em></h2>
+			<p>Le serveur d'application fournit un service nommé <a href="http://beanvalidation.org/">Bean Validation</a> (JSR303).
+			Bean Validation permet d'exprimer les contraintes de validité d'un objet ou des paramètres d'une méthode de ressouce avec des annotations.
+			JAX-RS utilise les informations de ces annotations pour valider les requêtes HTTP.</p>
+			<figure>
+				<figcaption>Utilisation de Bean Validation sur les attributs d'une classe</figcaption>
+<pre><code class="java">
+package fr.epsi;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="person", namespace="http://www.epsi.fr/cours/javaee")
+public class Person {
+
+  @Size(min = 1, message = "Le nom est obligatoire !")
+  private String name;
+
+  @Min(value=1, message = "L'âge doit être un nombre positif !")
+  @Max(value=99, message = "L'âge ne peut pas dépasser 99 ans !")
+  private int age;
+
+  private List  &lt;Person&gt; children = new ArrayList  &lt;&gt;();
+
+  public Person() {
+  }
+
+  public Person(String name, int age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  @XmlElement(namespace="http://www.epsi.fr/cours/javaee")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  @XmlElement(namespace="http://www.epsi.fr/cours/javaee")
+  public int getAge() {
+    return age;
+  }
+
+  public void setAge(int age) {
+    this.age = age;
+  }
+
+  @XmlElement(name="person", namespace="http://www.epsi.fr/cours/javaee")
+  @XmlElementWrapper(name="children", namespace="http://www.epsi.fr/cours/javaee")
+  public List  &lt;Person&gt; getChildren() {
+    return children;
+  }
+
+  public Person addChild(Person child) {
+    this.children.add(child);
+    return child;
+  }
+}
+
+</code></pre>
+			</figure>
+
+			<figure>
+				<figcaption>Utilisation de Bean Validation sur un paramètre de méthode d'une ressource</figcaption>
+<pre><code class="java">
+package fr.epsi;
+
+import javax.validation.constraints.Size;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+@Path("/person")
+public class PersonResource {
+
+  @GET
+  @Path("/{name}")
+  @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+  public Response get(
+      @Size(min = 1, message = "Chemin de ressource invalide !")
+      @PathParam("name") String name) {
+    Person person;
+
+    // ...
+
+    return Response.ok(person).build();
+  }
+}
+
+</code></pre>
+			</figure>
+
+			<p>La documentation des annotations de Bean Validation est disponible dans la
+			documentation de l'API Java EE&nbsp;:
+			<a class="explicit" href="http://docs.oracle.com/javaee/7/api/javax/validation/constraints/package-summary.html">http://docs.oracle.com/javaee/7/api/javax/validation/constraints/package-summary.html</a></p>
+		</section>
+
+		<section>
+			<h2>Injection des dépendances</h2>
+			<p>Comme les Servlets, les ressources racines (celles identifiées par l'annotation
+			<a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/Path.html">@Path</a> sur la classe)
+			sont des composants Java EE. À ce titre, elles supportent l'injection de dépendance avec, par exemple,
+			l'annotation <a href="http://docs.oracle.com/javaee/7/api/javax/annotation/Resource.html">@Resource</a>.
+			</p>
+			<figure>
+				<figcaption>Exemple d'injection d'une <code>DataSource</code></figcaption>
+<pre><code class="java">
+package fr.epsi;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("/person")
+public class PersonResource {
+
+  @Resource(name="person")
+  private DataSource dataSource;
+
+  @GET
+  @Path("/{id}")
+  @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+  public Person get(@PathParam("id") long id) throws SQLException {
+    try(Connection con = dataSource.getConnection();
+      Statement stmt = con.createStatement();
+      ResultSet rs = stmt.executeQuery("select name, age from Person where id=" + id)) {
+
+      if (! rs.next()) {
+        throw new NotFoundException();
+      }
+      return new Person(rs.getString("name"), rs.getInt("age"));
+    }
+  }
+}
+
+</code></pre>
+			</figure>
+		</section>
+
+		<section>
+			<h2>Support de l'hypermedia (HATEOAS)</h2>
+
+			<p>JAX-RS permet d'implémenter un support de l'hypermedia grâce aux liens Web.
+			La classe <a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/core/Link.html"><code><strong>Link</strong></code></a>
+			permet de construire une représentation Java d'un lien HTTP&nbsp;:</p>
+<pre><code class="java">
+  Link link = Link.fromPath("/persons").rel("collection").title("Liste des individus").build();
+
+</code></pre>
+
+			<p>On peut aussi directement positionner un lien dans la réponse HTTP grâce à la méthode
+			<a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/core/Response.ResponseBuilder.html#link-java.lang.String-java.lang.String-"></a><code>link</code>
+			lors de la construction de la réponse&nbsp;:</p>
+
+<pre><code class="java">
+  Response.ok().link("/persons", "collection").build();
+
+</code></pre>
+
+			<p>Le code ci-dessus produira une réponse HTTP de la forme&nbsp;:</p>
+
+<pre><code class="http">
+HTTP/1.1 200 OK
+Link: &lt;/persons&gt;; rel="collection"
+Content-length: 0
+
+
+</code></pre>
+
+			<p>La classe <a href="http://docs.oracle.com/javaee/7/api/javax/ws/rs/core/Link.html"><code><strong>Link</strong></code></a>
+			est également sérialisable en JSON ou XML, il est donc possible de s'en servir comme attribut dans une classe Java.</p>
+		</section>
+
+		<section>
+			<h2>Implémenter un client HTTP</h2>
+			<p>JAX-RS fournit également une API pour implémenter un client HTTP.
+			On utilise la classe <a href="https://docs.oracle.com/javaee/7/api/javax/ws/rs/client/ClientBuilder.html"><strong><code>ClientBuilder</code></strong></a>
+			pour créer une instance de la classe <a href="https://docs.oracle.com/javaee/7/api/javax/ws/rs/client/Client.html"><strong><code>Client</code></strong></a>.
+			</p>
+			<figure>
+				<figcaption>Exemple d'utilisation d'un client HTTP</figcaption>
+<pre><code class="java">
+package fr.epsi;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+
+public class ExempleClient {
+
+  public static void main(String[] args) {
+    Client client = ClientBuilder.newClient();
+
+    WebTarget target = client.target("http://www.server.net/person");
+    Person person = target.request().get(Person.class);
+
+    // ...
+  }
+}
+
+</code></pre>
+			</figure>
+		</section>
 	</article>
-	
-	<!-- 
-	
-	* Mapping XML et JSON
-
-	* @Context
-	
-	* gestion des exceptions
-	
-	* Exemple avancé : MessageBodyWriter
-	
-	* Utilisation de Bean Validation
-
-	* Utilisation de CDI
-	
-	 -->
 
 	<footer class="license">
 		<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/fr/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/3.0/fr/88x31.png" /></a><br />Cette œuvre est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/fr/">Licence Creative Commons Attribution -  Partage dans les Mêmes Conditions 3.0 France</a>.
